@@ -1933,7 +1933,7 @@ CREATE TABLE `user_file_upload` (
   `profile_id` int(11) NOT NULL,
   `school_id` int(11) NOT NULL,
   `syear` int(11) NOT NULL,
-  `download_id` varchar(50) NOT NULL DEFAULT UUID(),
+  `download_id` varchar(50) NOT NULL,
   `name` varchar(255) NOT NULL,
   `size` int(11) NOT NULL,
   `type` varchar(255) NOT NULL,
@@ -1941,6 +1941,12 @@ CREATE TABLE `user_file_upload` (
   `file_info` varchar(255) NOT NULL,
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TRIGGER before_insert_user_file_upload
+  BEFORE INSERT ON user_file_upload
+  FOR EACH ROW
+  SET new.download_id = uuid();
+
 
 ALTER TABLE `staff` ADD `img_name` VARCHAR(255) NULL AFTER `disability_desc`;
 ALTER TABLE `staff` ADD `img_content` LONGBLOB NULL AFTER `img_name`;

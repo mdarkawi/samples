@@ -214,7 +214,7 @@
                                       `profile_id` int(11) NOT NULL,
                                       `school_id` int(11) NOT NULL,
                                       `syear` int(11) NOT NULL,
-                                      `download_id` varchar(50) NOT NULL DEFAULT UUID(),
+                                      `download_id` varchar(50) NOT NULL,
                                       `name` varchar(255) NOT NULL,
                                       `size` int(11) NOT NULL,
                                       `type` varchar(255) NOT NULL,

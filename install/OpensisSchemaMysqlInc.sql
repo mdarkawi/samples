@@ -2124,13 +2124,20 @@ CREATE TABLE `user_file_upload` (
   `profile_id` int(11) NOT NULL,
   `school_id` int(11) NOT NULL,
   `syear` int(11) NOT NULL,
-  `download_id` varchar(50) NOT NULL DEFAULT UUID(),
+  `download_id` varchar(50) NOT NULL,
   `name` varchar(255) NOT NULL,
   `size` int(11) NOT NULL,
   `type` varchar(255) NOT NULL,
   `content` longblob NOT NULL,
   `file_info` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TRIGGER before_insert_user_file_upload
+  BEFORE INSERT ON user_file_upload
+  FOR EACH ROW
+  SET new.download_id = uuid();
+
+
 
 ALTER TABLE `students` CHANGE `language` `language_id` INT(8) NULL DEFAULT NULL;
 
